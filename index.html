@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8" />
+
+    <title>Hoopla Game</title>
+    <meta name="description" content="Free online HTML5 Basketball game.">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            background: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+        html, body {
+             margin: 0 !important;
+             padding: 0 !important;
+            overscroll-behavior: none;
+         }
+
+    </style>
+
+    <link rel="icon" href="images/bball.png" type="image/x-icon">
+</head>
+<body>
+<canvas id="game" width="480" height="320"></canvas>
+
+<div style="display:none;">
+    <img id="bball" src="images/bball.png" width="200" height="200" alt="basketball"/>
+
+    <img id="hoop" src="images/hoop.png" width="469" height="391" alt="basketball"/>
+    <img id="bb" src="images/backboard.png" width="180" height="131" alt="basketball"/>
+    <img id="stand" src="images/stand.png" width="180" height="459" alt="basketball"/>
+    <img id="bg" src="images/bg3.jpg" width="180" height="459" alt="basketball"/>
+</div>
+
+
+<script src="hoopla.js"></script>
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L2HT3FSNPW"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-L2HT3FSNPW');
+</script>
+
+</body>
+</html>
