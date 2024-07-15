@@ -27,6 +27,9 @@ let rimWidth ;
 let rimGap;
 let standWidth;
 
+let scaleFactorHoop = 1.00;
+let rimGapScaled = rimGap * scaleFactorHoop;
+
 score = 0;
 
 let isDragging = false;
@@ -62,6 +65,7 @@ function setup() {
 
      zoneX = 1;
      zoneY = 1;
+     scaleHoop();
 
 
     zoneXf();
@@ -74,14 +78,16 @@ window.onresize = function(event) {
 };
 
 function zoneXf() {
-    let max = hoopXintersect - rimWidth * 2 - rimGap - (zoneWidth()*1.2);
+    let max = hoopXintersect - rimWidth * 2 - rimGapScaled - (zoneWidth()*1.2);
 
     let min = 600 * (canvas.width/ 1600);
     zoneX = Math.floor(Math.random() * (max - min) + min);
     if(zoneX > max){
         zoneX = max;
     }
-    scaleHoop((98)/100);
+    scaleFactorHoop = scaleFactorHoop * (98)/100;
+    scaleHoop();
+    console.log(scaleFactorHoop);
 }
 
 function zoneYf() {
@@ -156,7 +162,7 @@ function drawRim() {
 
     ctx.beginPath();
 
-    ctx.drawImage(document.getElementById("hoop"), hoopXintersect - rimGap - rimWidth, hoopYintersect, rimGap, rimGap);
+    ctx.drawImage(document.getElementById("hoop"), hoopXintersect - rimGapScaled - rimWidth, hoopYintersect, rimGapScaled, rimGapScaled);
     //ctx.rect(hoopXintersect - rimGap- rimWidth, hoopYintersect - backboardWidth, rimWidth, rimHeight);
     //ctx.rect(hoopXintersect - rimWidth, hoopYintersect - backboardWidth, rimWidth, rimHeight);
     //ctx.fillStyle = "#000000";
@@ -205,13 +211,14 @@ function collisionBackboard() {
 
 function collisionRim() {
 
-    return x + radius > hoopXintersect - rimGap - rimWidth && x - radius < hoopXintersect - rimGap && y + radius > hoopYintersect && y - radius < hoopYintersect + rimHeightCollision
+    return x + radius > hoopXintersect - rimGapScaled - rimWidth && x - radius < hoopXintersect - rimGapScaled && y + radius > hoopYintersect && y - radius < hoopYintersect + rimHeightCollision
         || x + radius > hoopXintersect && x - radius < hoopXintersect + rimWidth && y + radius > hoopYintersect && y - radius < hoopYintersect + rimHeightCollision;
 }
 
 
-function scaleHoop(scaleFactor) {
-    rimGap *= scaleFactor;
+function scaleHoop() {
+    rimGapScaled = rimGap * scaleFactorHoop;
+    console.log(rimGapScaled);
 }
 
 
@@ -262,7 +269,7 @@ function throughHoop() {
         return;
     }
     if (// is currently between the rims
-        x > hoopXintersect - rimGap - rimWidth && x < hoopXintersect + rimWidth && y > hoopYintersect - rimWidth && y < hoopYintersect + rimHeightScore &&
+        x > hoopXintersect - rimGapScaled - rimWidth && x < hoopXintersect + rimWidth && y > hoopYintersect - rimWidth && y < hoopYintersect + rimHeightScore &&
         //is going to be under the rims next time.
         y + dy > hoopYintersect + rimHeightScore) {
 
